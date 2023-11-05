@@ -61,7 +61,7 @@ if keywords_input:
             for keyword in keywords_list:
                 highlighted_text = row['本文'].replace(keyword, f"<span style='color:red;'>{keyword}</span>")
                 st.write(f"**規程名:** {row['規程名']}")
-                st.write(f"**括弧書き:** {row['括弧書き']}")
+                st.write(f"**条文名:** {row['条文名']}")
                 st.write(f"**条番号:** {row['条番号']}")
                 st.write(f"**本文:**")
                 st.markdown(highlighted_text, unsafe_allow_html=True)
