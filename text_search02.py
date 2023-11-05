@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import xlrd
 
 # データフレームの読み込み
 df = pd.read_excel('2023-09_kitei_dataframe.xls')
