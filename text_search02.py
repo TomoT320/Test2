@@ -6,6 +6,9 @@ df = pd.read_excel('2023-09_kitei_dataframe.xls')
 
 # DataFrame全体から改行文字を削除
 df = df.applymap(lambda x: x.replace('\n', '') if isinstance(x, str) else x)
+# DataFrame内の全てのセルに対して半角スペースと全角スペースを削除する関数を適用
+df = df.applymap(lambda x: x.replace(' ', '').replace('　', '') if isinstance(x, str) else x)
+
 
 # Streamlitアプリケーションの設定
 st.title('Text Searching App')
@@ -51,8 +54,9 @@ if keywords_input:
     st.write('各規程名ごとのヒット件数:')
     st.write(regulation_counts)
 
+
     for index, row in filtered_df.iterrows():
-        with st.expander(f'結果 {index + 1}'):
+        with st.expander(f'結果 {index + 1}', expanded=True):  # `expanded=True` でエクスパンダを自動的に開く
             # キーワードを赤字にして全文を表示
             for keyword in keywords_list:
                 highlighted_text = row['本文'].replace(keyword, f"<span style='color:red;'>{keyword}</span>")
@@ -61,6 +65,7 @@ if keywords_input:
                 st.write(f"**条番号:** {row['条番号']}")
                 st.write(f"**本文:**")
                 st.markdown(highlighted_text, unsafe_allow_html=True)
+
 
 # クリアボタンがクリックされた場合、一時的に新しいテキスト入力ウィジェットを表示してキーワード入力をクリア
 if clear_button_pressed:
